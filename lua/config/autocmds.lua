@@ -105,7 +105,7 @@ _G.block_operations = {
   end,
 }
 
--- Visual Block mode keybindings for functions
-vim.keymap.set("x", "<leader>bn", ":lua block_operations.number_lines()<CR>", { noremap = true, silent = true, desc = "Number lines in block" })
+-- Visual Block mode keybindings for functions (use different keys to avoid conflicts)
+vim.keymap.set("x", "<leader>bN", ":lua block_operations.number_lines()<CR>", { noremap = true, silent = true, desc = "Number lines in block" })
 vim.keymap.set("x", "<leader>br", ":lua block_operations.remove_numbers()<CR>", { noremap = true, silent = true, desc = "Remove line numbers" })
 vim.keymap.set("x", "<leader>bb", ":lua block_operations.box_comment()<CR>", { noremap = true, silent = true, desc = "Box comment around block" })

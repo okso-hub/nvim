@@ -110,7 +110,23 @@ return {
     end,
   },
 
-  -- Which key for keybinding help
+  -- Icons for better UI
+  {
+    "echasnovski/mini.icons",
+    opts = {},
+    lazy = true,
+    specs = {
+      { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
+    },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
+
+  -- Which-Key for better keybinding discovery
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -125,7 +141,7 @@ return {
             suggestions = 20,
           },
         },
-        window = {
+        win = {
           border = "rounded",
           position = "bottom",
           margin = { 1, 0, 1, 0 },
@@ -140,54 +156,42 @@ return {
         },
       })
 
-      -- Visual Block mode mappings
-      wk.register({
-        ["<leader>b"] = {
-          name = "📦 Block Operations",
-          c = "Comment block (//))",
-          h = "Comment block (#)",
-          l = "Comment block (--)",
-          u = "Uncomment block",
-          d = "Delete block",
-          y = "Yank block",
-          p = "Paste block",
-          u = "Uppercase block",
-          l = "Lowercase block",
-          n = "Number lines incrementally",
-          a = "Align block",
-          ['"'] = "Surround with quotes",
-          ["'"] = "Surround with single quotes",
-          ["("] = "Surround with parentheses",
-          ["["] = "Surround with brackets",
-          ["{"] = "Surround with braces",
-          ["="] = "Align on =",
-          [":"] = "Align on :",
-          [","] = "Align on ,",
-          ["|"] = "Align on |",
-          r = "Remove line numbers",
-          b = "Box comment around block",
-        },
-        ["<leader>v"] = {
-          name = "👁️ Visual Block Mode",
-          b = "Enter Visual Block mode",
-          c = "Select to end of line (column)",
-          a = "Select to end of file (column)",
-          i = "Insert at beginning of column",
-          a = "Append at end of column",
-        },
-      }, { mode = "x" })
+      -- Register Visual Block mode mappings using new spec
+      wk.add({
+        -- Visual mode block operations
+        { "<leader>b", group = "📦 Block Operations", mode = "x" },
+        { "<leader>bc", desc = "Comment block (//)", mode = "x" },
+        { "<leader>bh", desc = "Comment block (#)", mode = "x" },
+        { "<leader>bl", desc = "Comment block (--)", mode = "x" },
+        { "<leader>bu", desc = "Uncomment block", mode = "x" },
+        { "<leader>bd", desc = "Delete block", mode = "x" },
+        { "<leader>by", desc = "Yank block", mode = "x" },
+        { "<leader>bp", desc = "Paste block", mode = "x" },
+        { "<leader>bU", desc = "Uppercase block", mode = "x" },
+        { "<leader>bL", desc = "Lowercase block", mode = "x" },
+        { "<leader>bn", desc = "Number lines incrementally", mode = "x" },
+        { "<leader>bN", desc = "Number lines with function", mode = "x" },
+        { "<leader>ba", desc = "Align block", mode = "x" },
+        { '<leader>b"', desc = "Surround with quotes", mode = "x" },
+        { "<leader>b'", desc = "Surround with single quotes", mode = "x" },
+        { "<leader>b(", desc = "Surround with parentheses", mode = "x" },
+        { "<leader>b[", desc = "Surround with brackets", mode = "x" },
+        { "<leader>b{", desc = "Surround with braces", mode = "x" },
+        { "<leader>b=", desc = "Align on =", mode = "x" },
+        { "<leader>b:", desc = "Align on :", mode = "x" },
+        { "<leader>b,", desc = "Align on ,", mode = "x" },
+        { "<leader>b|", desc = "Align on |", mode = "x" },
+        { "<leader>br", desc = "Remove line numbers", mode = "x" },
+        { "<leader>bb", desc = "Box comment around block", mode = "x" },
 
-      -- Normal mode block helpers
-      wk.register({
-        ["<leader>v"] = {
-          name = "👁️ Visual Block Mode",
-          b = "Enter Visual Block mode",
-          c = "Select to end of line (column)",
-          a = "Select to end of file (column)",
-          i = "Insert at beginning of column",
-          a = "Append at end of column",
-        },
-      }, { mode = "n" })
+        -- Visual Block mode helpers
+        { "<leader>v", group = "👁️ Visual Block Mode", mode = { "n", "x" } },
+        { "<leader>vb", desc = "Enter Visual Block mode", mode = { "n", "x" } },
+        { "<leader>vc", desc = "Select to end of line (column)", mode = { "n", "x" } },
+        { "<leader>vf", desc = "Select to end of file (column)", mode = { "n", "x" } },
+        { "<leader>vi", desc = "Insert at beginning of column", mode = { "n", "x" } },
+        { "<leader>va", desc = "Append at end of column", mode = { "n", "x" } },
+      })
     end,
   },
 
@@ -228,7 +232,6 @@ return {
         },
       })
     end,
-    dependencies = { {"nvim-tree/nvim-web-devicons"}}
   },
 
   -- Smooth scrolling
@@ -281,15 +284,9 @@ return {
     "junegunn/vim-easy-align",
     event = "VeryLazy",
     config = function()
-      -- Visual mode alignment
+      -- Visual mode alignment (use 'ga' to avoid conflicts)
       vim.keymap.set("x", "ga", "<Plug>(EasyAlign)", { desc = "Easy align" })
       vim.keymap.set("n", "ga", "<Plug>(EasyAlign)", { desc = "Easy align" })
-      
-      -- Block-specific alignment shortcuts
-      vim.keymap.set("x", "<leader>b=", "ga=", { noremap = false, desc = "Align on =" })
-      vim.keymap.set("x", "<leader>b:", "ga:", { noremap = false, desc = "Align on :" })
-      vim.keymap.set("x", "<leader>b,", "ga,", { noremap = false, desc = "Align on ," })
-      vim.keymap.set("x", "<leader>b|", "ga|", { noremap = false, desc = "Align on |" })
     end,
   },
 }
