@@ -53,10 +53,10 @@ return {
 
     -- Setup fidget for LSP progress
     require("fidget").setup({})
-    local lspconfig = require("lspconfig")
+    local lsp = vim.lsp
 
     -- Configure lua_ls with specific settings
-    lspconfig.lua_ls.setup({
+    lsp.config["lua_ls"] = {
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
@@ -75,36 +75,66 @@ return {
           },
         },
       },
-    })
+    }
 
     -- Configure TypeScript/JavaScript LSP
-    lspconfig.ts_ls.setup({
+    lsp.config["ts_ls"] = {
       on_attach = on_attach,
       capabilities = capabilities,
-    })
+    }
 
     -- Configure Python LSP
-    lspconfig.pyright.setup({
+    lsp.config["pyright"] = {
       on_attach = on_attach,
       capabilities = capabilities,
-    })
+    }
 
     -- Configure HTML LSP
-    lspconfig.html.setup({
+    lsp.config["html"] = {
       on_attach = on_attach,
       capabilities = capabilities,
-    })
+    }
 
     -- Configure CSS LSP
-    lspconfig.cssls.setup({
+    lsp.config["cssls"] = {
       on_attach = on_attach,
       capabilities = capabilities,
-    })
+    }
 
     -- Configure JSON LSP
-    lspconfig.jsonls.setup({
+    lsp.config["jsonls"] = {
       on_attach = on_attach,
       capabilities = capabilities,
+    }
+
+    -- Configure LaTeX LSP
+    lsp.config["texlab"] = {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        texlab = {
+          build = {
+            onSave = true,
+          },
+        },
+      },
+    }
+
+    -- Configure Typst LSP
+    lsp.config["typst_lsp"] = {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+
+    lsp.enable({
+      "lua_ls",
+      "ts_ls",
+      "pyright",
+      "html",
+      "cssls",
+      "jsonls",
+      "texlab",
+      "typst_lsp",
     })
 
     -- Setup fidget for LSP progress

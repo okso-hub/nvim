@@ -25,6 +25,8 @@ return {
         "markdown_inline",
         "bash",
         "regex",
+        "latex",
+        "typst",
       },
 
       -- Install parsers synchronously (only applied to `ensure_installed`)

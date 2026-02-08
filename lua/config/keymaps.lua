@@ -93,6 +93,15 @@ keymap("x", "<leader>b:", "ga:", { noremap = false, desc = "Align on :" })
 keymap("x", "<leader>b,", "ga,", { noremap = false, desc = "Align on ," })
 keymap("x", "<leader>b|", "ga|", { noremap = false, desc = "Align on |" })
 
+-- LaTeX / Typst
+keymap("n", "<leader>lc", "<cmd>VimtexCompile<CR>", { noremap = true, silent = true, desc = "LaTeX compile" })
+keymap("n", "<leader>lv", "<cmd>VimtexView<CR>", { noremap = true, silent = true, desc = "LaTeX view" })
+keymap("n", "<leader>lq", "<cmd>VimtexStop<CR>", { noremap = true, silent = true, desc = "LaTeX stop" })
+
+keymap("n", "<leader>tp", "<cmd>TypstPreviewToggle<CR>", { noremap = true, silent = true, desc = "Typst preview toggle" })
+keymap("n", "<leader>to", "<cmd>TypstPreview<CR>", { noremap = true, silent = true, desc = "Typst preview" })
+keymap("n", "<leader>ts", "<cmd>TypstPreviewStop<CR>", { noremap = true, silent = true, desc = "Typst preview stop" })
+
 -- File Explorer
 keymap("n", "<leader>e", ":Neotree toggle<CR>", opts)
 
@@ -103,7 +112,7 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
 
 -- Terminal
-keymap("n", "<leader>t", ":ToggleTerm<CR>", opts)
+keymap("n", "<leader>tt", ":ToggleTerm<CR>", { noremap = true, silent = true, desc = "Toggle terminal" })
 
 -- Save file
 keymap("n", "<C-s>", ":w<CR>", opts)

@@ -71,7 +71,7 @@ A modern, simple yet feature-rich Neovim configuration designed for productivity
 - `Ctrl+arrows` - Resize windows
 
 ### Terminal
-- `<leader>t` - Toggle terminal
+- `<leader>tt` - Toggle terminal
 - `Ctrl+\` - Quick terminal toggle
 
 ### LSP
@@ -80,6 +80,19 @@ A modern, simple yet feature-rich Neovim configuration designed for productivity
 - `<leader>ca` - Code actions
 - `<leader>rn` - Rename symbol
 - `<leader>f` - Format code
+
+### Typst / LaTeX
+**Leader key ist `<Space>`** (kein Backslash). Beispiel: `<leader>tp` heißt **Space + t + p**.
+
+**Typst**
+- `<leader>tp` - Preview toggle
+- `<leader>to` - Preview starten
+- `<leader>ts` - Preview stoppen
+
+**LaTeX (VimTeX)**
+- `<leader>lc` - Kompilieren
+- `<leader>lv` - PDF anzeigen
+- `<leader>lq` - Kompilierung stoppen
 
 ### Other
 - `<leader>h` - Clear search highlights
@@ -113,6 +126,8 @@ The configuration comes with these language servers pre-configured:
 - **HTML** (html)
 - **CSS** (cssls)
 - **JSON** (jsonls)
+- **LaTeX** (texlab)
+- **Typst** (typst_lsp)
 
 To install additional language servers:
 1. Run `:Mason` in Neovim
